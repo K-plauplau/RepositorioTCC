@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Pedidos";
+        Layout = null;
+    <link rel="stylesheet" href="~/Content/pedidos.css" />
+    
+}
+<title>Restaurante Alpacchino - Pedidos</title>
+
+<head>
+    <link href="~/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+
+
+    <link href="~/Content/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="~/Content/css/creative.min.css" rel="stylesheet">
+
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav" style="background-color: white">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="http://localhost:59641/Home/Index"><img src="~/Content/img/_Logo.png" /></a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto my-2 my-lg-0"></ul>
+            </div>
+        </div>
+    </nav>
+    <div class="tudo" style="background-color: darkred">
+        <h2 class="text-center text-muted" style="padding-top:200px; color:white !important;">Faça seu pedido!</h2>
+        <form action="http://localhost:59641/Home/Index" method="get" >
+            <fieldset>
+                <div class="form-group text-center">
+                    @Html.Label("Pedido", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12 text-center">
+                        <select id="Pedidos" name="Pedidos">
+                            <option selected="selected" value="0">Escolha</option>
+                            <option value="1">Marmita com Frango   R$ 19,99</option>
+                            <option value="2">Marmita com Bife  R$ 19,99</option>
+                            <option value="3">Marmita Vegetariana  R$ 24,00</option>
+                            <option value="4">Marmita com Peixe  R$ 19,99</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    @Html.Label("Endereço", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12 text-center">
+                        <input type="text" size="20" maxlength="40" required />
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    @Html.Label("Telefone", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12 text-center">
+                        <input type="number" size="20" maxlength="11" required />
+                    </div>
+                </div>
+
+                <div class="form-group text-center">
+                    @Html.Label("Forma de Pagamento", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12 text-center">
+                        <select id="Pagamento" name="Pagamento">
+
+                            <option selected="selected" value="0">Escolha</option>
+                            <option value="1">Débito               </option>
+                            <option value="2">Crédito              </option>
+                            <option value="3">Dinheiro             </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <div class="col-md-offset-2 col-md-10" style="padding-left:885px; padding-bottom: 200px;">
+                        <input type="submit" value="Enviar Pedido" class="btn btn-success" />
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <footer class="bg-light py-5">
+        <div class="container">
+            <div class="small text-center text-muted">Copyright &copy; @DateTime.Now.Year - Restaurante Alpacchino</div>
+        </div>
+    </footer>
+</body>

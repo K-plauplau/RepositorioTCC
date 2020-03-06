@@ -1,0 +1,99 @@
+﻿
+@{
+    Layout = null;
+
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<!DOCTYPE html>
+<html larg="pt-BR" dir="ltr">
+<head>
+
+
+    <meta charset="utf-9">
+    <title> Tela de Login </title>
+    <link href="~/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <link href="~/Content/login.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+
+
+    <link href="~/Content/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="~/Content/css/creative.min.css" rel="stylesheet">
+
+
+    <link a href="bootstrap.css" rel="stylesheet" />
+    <link a href="style.css" rel="stylesheet" />
+    <script language="javascript" type="text/javascript">
+        function validar() {
+            var email = form1.email.value;
+            var senha = form1.senha.value;
+            if (email == "") {
+                alert('Digite seu email');
+                form1.email.focus();
+                return false;
+            }
+
+            if (senha == "") {
+                alert('Digite sua senha');
+                form1.senha.focus();
+                return false;
+            }
+    </script>
+    <style>
+        div.a {
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav" style="background-color: white">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="http://localhost:59641/Principal/Index"><img src="~/Content/img/_Logo.png" /></a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto my-2 my-lg-0"></ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="a" style="background-color:darkred; padding-top:100px">
+        <header class="top">
+            <div id="mySidenav" class="sidenav">
+                <br />
+
+
+
+                <h1 style="color: white !important"> Login </h1> <br>
+                <form action="http://localhost:59641/Home/IndexLogado">
+                    <p>
+                        <h3>
+                            Email:
+                            <input type="email" required="required" name="" placeholder="Insira o seu email">
+                        </h3>
+                    </p>
+                    <p>
+                        <h3>
+                            Senha:
+                            <input type="password" required="required" name="" placeholder="Insira sua senha">
+                        </h3>
+                    </p><br />
+                    <h4>@Html.ActionLink("Cadastre-se", "Cliente", "Principal")</h4>
+                    <input type="submit" onclick="return validar()" class="btn btn-success" name="Logar">
+                </form>
+            </div>
+        </header>
+        <footer class="bg-light py-5">
+            <div class="container">
+                <div class="small text-center text-muted">Copyright &copy; @DateTime.Now.Year - Restaurante Alpacchino</div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

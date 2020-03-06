@@ -1,0 +1,13 @@
+﻿body {
+    color:darkgray !important;
+}
+.btn-success:hover {
+    background-color: white !important;
+    border-color: whitesmoke !important;
+    color: red !important;
+}
+
+.btn-success {
+    background-color: darkgray !important;
+    border-color: grey !important;
+}

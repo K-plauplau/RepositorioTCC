@@ -1,0 +1,258 @@
+﻿@model tcc_curso.Models.CLIENTE
+@{
+    
+
+    Layout = null;
+    ViewBag.Title = "Cliente";
+}
+
+<h2>Cliente</h2>
+<html>
+<head>
+    <link href="~/Content/cliente.css" rel="stylesheet" />
+    <link href="~/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href="~/Content/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="~/Content/css/creative.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>Cadastre-se</title>
+    <meta charset="utf-8">
+    <script language="javascript" type="text/javascript">
+        function validar() {
+            var email = form1.email.value;
+            var senha = form1.senha.value;
+            var nome = form1.nome.value;
+            var sobrenome = form1.sobrenome.value;
+            var cpf = form1.cpf.value;
+            var dt_nasc = form1.dt_nasc.value;
+            var telefone = form1.telefone.value;
+            var celular = form1.celular.value;
+
+            if (email == "") {
+                alert('Digite seu email');
+                form1.email.focus();
+                return false;
+            }
+
+            if (senha == "") {
+                alert('Digite sua senha');
+                form1.senha.focus();
+                return false;
+            }
+
+
+            if (nome == "") {
+                alert('Digite seu nome');
+                form1.nome.focus();
+                return false;
+            }
+
+            if (sobrenome == "") {
+                alert('Digite seu sobrenome');
+                form1.sobrenome.focus();
+                return false;
+            }
+
+            if (cpf == "") {
+                alert('Informe seu CPF');
+                form1.cpf.focus();
+                return false;
+            }
+
+            if (dt_nasc == "") {
+                alert('Informe sua data de nascimento');
+                form1.dt_nasc.focus();
+                return false;
+            }
+
+            if (telefone == "") {
+                alert('Digite seu telefone');
+                form1.telefone.focus();
+                return false;
+            }
+
+            if (celular == "") {
+                alert('Digite seu celular');
+                form1.celular.focus();
+                return false;
+            }
+        }
+
+        function limpa_formulário_cep() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('rua').value = ("");
+            document.getElementById('bairro').value = ("");
+            document.getElementById('cidade').value = ("");
+
+            document.getElementById('uf').value = ("");
+
+
+        }
+
+        function meu_callback(conteudo) {
+            if (!("erro" in conteudo)) {
+                //Atualiza os campos com os valores.
+                document.getElementById('rua').value = (conteudo.logradouro);
+                document.getElementById('bairro').value = (conteudo.bairro);
+                document.getElementById('cidade').value = (conteudo.localidade);
+                document.getElementById('uf').value = (conteudo.uf);
+
+            } //end if.
+            else {
+                //CEP não Encontrado.
+                limpa_formulário_cep();
+                alert("CEP não encontrado.");
+            }
+        }
+
+        function pesquisacep(valor) {
+
+            //Nova variável "cep" somente com dígitos.
+            var cep = valor.replace(/\D/g, '');
+
+            //Verifica se campo cep possui valor informado.
+            if (cep != "") {
+
+                //Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+
+                //Valida o formato do CEP.
+                if (validacep.test(cep)) {
+
+                    //Preenche os campos com "..." enquanto consulta webservice.
+                    document.getElementById('rua').value = "...";
+                    document.getElementById('bairro').value = "...";
+                    document.getElementById('cidade').value = "...";
+                    document.getElementById('uf').value = "...";
+
+
+                    //Cria um elemento javascript.
+                    var script = document.createElement('script');
+
+                    //Sincroniza com o callback.
+                    script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+
+                    //Insere script no documento e carrega o conteúdo.
+                    document.body.appendChild(script);
+
+                } //end if.
+                else {
+                    //cep é inválido.
+                    limpa_formulário_cep();
+                    alert("Formato de CEP inválido.");
+                }
+            } //end if.
+            else {
+                //cep sem valor, limpa formulário.
+                limpa_formulário_cep();
+            }
+        };
+
+
+
+
+        function checarEmail() {
+            if (document.forms[0].email.value == ""
+
+                || document.forms[0].email.value.indexOf('.') == -1) {
+                alert("Por favor, informe um E-MAIL válido!");
+                return false;
+            }
+        }
+
+
+        function formatar(mascara, documento) {
+            var i = documento.value.length;
+            var saida = mascara.substring(0, 1);
+            var texto = mascara.substring(i)
+
+            if (texto.substring(0, 1) != saida) {
+                documento.value += texto.substring(0, 1);
+            }
+
+        }
+
+
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav" style="background-color: white">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="http://localhost:59641/Principal/Index"><img src="~/Content/img/_Logo.png" /></a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto my-2 my-lg-0"></ul>
+            </div>
+        </div>
+    </nav>
+    
+    <form name="form1" action="http://localhost:59641/Home/Login" method="post" style="padding-top:100px; padding-left:775px; background-color:darkred; color:gray">
+        <h1 style="color:white !important; padding-left: 15px">Cadastre-se</h1>
+        Email:
+        <input name="email" type="text" class="input" id="email" onblur="checarEmail();" /></h5><br><br>
+        <form action="" name="f1">
+            Senha:
+            <input name="senha" type="password" name="senha1"><br /><br />
+            <h2>Dados Pessoais</h2><br>
+            <form name="form1" action="enviar.php" method="post">
+                Nome:
+                <input name="nome" type="text" ><br><br>
+                Sobrenome:
+                <input name="sobrenome" type="text"><br><br>
+                CPF:
+                <input name="cpf" type="text" maxlength="14" OnKeyPress="formatar('###.###.###-##', this)"><br><br>
+
+                <h2>Telefones</h2>
+                Telefone Fixo:
+                <input type="text" name="telefone" maxlength="9" OnKeyPress="formatar('####-####', this)"><br><br>
+                Celular:
+                <input type="text" name="celular" maxlength="13" OnKeyPress="formatar('##-#####-####', this)"><br>
+                <form method="post" action="" onSubmit="return ( verifica() )" name="frmEnvia">
+                    <br><br>
+                        <form method="get" action=".">
+
+                            <h2>Endereço</h2>
+                            <label>
+                                Cep:
+                                <input type="text" name="cep" maxlength="9" OnKeyPress="formatar('#####.###', this)"
+                                       onblur="pesquisacep(this.value);" />
+                            </label><br />
+                            <label>
+                                Rua:
+                                <input name="rua" type="text" id="rua"  />
+                            </label><br />
+                            <label>
+                                Bairro:
+                                <input name="bairro" type="text" id="bairro"  />
+                            </label><br />
+                            <label>
+                                Cidade:
+                                <input name="cidade" type="text" id="cidade"  />
+                            </label><br />
+                            <label>
+                                Estado:
+                                <input name="uf" type="text" id="uf" size="2" />
+                            </label><br />
+
+                            N°:
+                            <input name="nr" type="text" size="5" />
+                            Complemento:
+                            <input name="complemento" type="text" /><br /><br />
+                            
+                            <input type="submit" onclick="return validar()" class="btn btn-success" style="margin-bottom:100px" name="Cadastrar">
+                        </form>
+
+                </form>
+                <footer class="bg-light py-5">
+                    <div class="container">
+                        <div class="small text-center text-muted">Copyright &copy; @DateTime.Now.Year - Restaurante Alpacchino</div>
+                    </div>
+                </footer>
+            </form>
+        </form>
+    </form>
+</body>
+</html>

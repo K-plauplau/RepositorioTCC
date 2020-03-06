@@ -1,0 +1,109 @@
+﻿@model tcc_curso.Models.Cliente
+@{
+    /**/
+
+    ViewBag.Title = "Marmitas";
+    <link href="~/Content/marmitas.css" rel="stylesheet" />
+    Layout = null;
+}
+
+<title>Restaurante Alpacchino - Cadastro</title>
+
+<head>
+    <link href="~/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+
+
+    <link href="~/Content/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="~/Content/css/creative.min.css" rel="stylesheet">
+
+
+</head>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav" style="background-color: white">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="http://localhost:59641/Principal/Index"><img src="~/Content/img/_Logo.png" /></a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="conteudo">
+        <h2 class="text-center text-muted" style="padding-top:130px; color:white !important;">Cadastro</h2>
+
+        <div class="align-content-md-center">
+            <h3 class="text-center text-muted" style=" color:darkgray !important">Cliente</h3>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group text-center">
+                @Html.Label("Nome Completo", htmlAttributes: new { @class = "control-label col-md-2 " })
+                <div class="col-md-12 text-center">
+                    @Html.EditorFor(model => model.Nome, new { @class = "form-control col-md-10 ", maxlength = "30" })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger", required = "required" })
+                </div>
+            </div>
+            <div class="form-group text-center">
+                @Html.Label("Senha", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12 text-center">
+                    <input type="password"  size="20" maxlength="15" required/>
+                    </div>
+            </div>
+
+            <div class="form-group text-center">
+                @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12 text-center">
+                    @Html.EditorFor(model => model.Email, new { @class = "form-control col-md-10", maxlength = "40" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", required = "required" })
+                </div>
+            </div>
+
+            <div class="form-group text-center">
+                @Html.Label("CEP", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12 text-center">
+                    <input type="number"  size="20" maxlength="8" required/>
+                </div>
+            </div>
+
+            <div class="form-group text-center">
+                @Html.Label("Cidade", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12 text-center">
+                    @Html.EditorFor(model => model.Cidade, new { @class = "form-control col-md-10 ", maxlength = "10" })
+                    @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group text-center">
+                @Html.Label("Bairro", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12 text-center">
+                    @Html.EditorFor(model => model.Bairro, new { @class = "form-control col-md-10", maxlength = "15" })
+                    @Html.ValidationMessageFor(model => model.Bairro, "", new { @class = "text-danger", required = "required" })
+                </div>
+            </div>
+
+
+            <div class="form-group col-md-12">
+                <div class="col-md-offset-2 col-md-10" style="padding-left:885px; padding-bottom: 100px;">
+                    <input type="submit" value="Cadastrar" class="btn btn-success" />
+                </div>
+            </div>
+            <footer class="bg-light py-5">
+        <div class="container">
+            <div class="small text-center text-muted">Copyright &copy; @DateTime.Now.Year - Restaurante Alpacchino</div>
+        </div>
+    </footer>
+        </div>
+    </div>
+</body>
+}

@@ -1,0 +1,43 @@
+﻿@model tcc_curso.Models.MARMITAS
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MARMITAS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PRECO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRECO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.INGREDIENTES)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.INGREDIENTES)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QUANTIDADE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QUANTIDADE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.COD_MARM }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

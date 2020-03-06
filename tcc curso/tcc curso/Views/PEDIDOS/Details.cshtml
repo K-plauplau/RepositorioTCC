@@ -1,0 +1,27 @@
+﻿@model tcc_curso.Models.PEDIDOS
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PEDIDOS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HORARIO_PEDIDO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HORARIO_PEDIDO)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.COD_PED }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

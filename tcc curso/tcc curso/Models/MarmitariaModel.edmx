@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MARMITAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="COD_CLIENTE" />
+          </Key>
+          <Property Name="COD_CLIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOME" Type="varchar" MaxLength="200" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="200" />
+          <Property Name="CEP" Type="varchar" MaxLength="10" />
+          <Property Name="RUA" Type="varchar" MaxLength="200" />
+          <Property Name="BAIRRO" Type="varchar" MaxLength="200" />
+          <Property Name="CIDADE" Type="varchar" MaxLength="150" />
+          <Property Name="ESTADO" Type="varchar" MaxLength="2" />
+          <Property Name="NR_CASA" Type="varchar" MaxLength="100" />
+          <Property Name="COMPLEMTENTO" Type="varchar" MaxLength="50" />
+          <Property Name="LOGIN" Type="varchar" MaxLength="200" />
+          <Property Name="SENHA" Type="varchar" MaxLength="200" />
+          <Property Name="PERFIL" Type="varchar" MaxLength="14" />
+        </EntityType>
+        <EntityType Name="FUNCIONARIO">
+          <Key>
+            <PropertyRef Name="COD_FUNC" />
+          </Key>
+          <Property Name="COD_FUNC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOME" Type="varchar" MaxLength="200" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="200" />
+          <Property Name="TELEFONE" Type="varchar" MaxLength="20" />
+          <Property Name="FUNÇÃO" Type="varchar" MaxLength="14" />
+        </EntityType>
+        <EntityType Name="MARMITAS">
+          <Key>
+            <PropertyRef Name="COD_MARM" />
+          </Key>
+          <Property Name="COD_MARM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRECO" Type="decimal" Precision="10" Scale="5" />
+          <Property Name="INGREDIENTES" Type="varchar" MaxLength="250" />
+          <Property Name="QUANTIDADE" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="PEDIDOS">
+          <Key>
+            <PropertyRef Name="COD_PED" />
+          </Key>
+          <Property Name="COD_PED" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_CLIENTE" Type="int" />
+          <Property Name="COD_MARM" Type="int" />
+          <Property Name="COD_FUNC" Type="int" />
+          <Property Name="HORARIO_PEDIDO" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <Association Name="FK_CLIENTE">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="PEDIDOS" Type="Self.PEDIDOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="COD_CLIENTE" />
+            </Principal>
+            <Dependent Role="PEDIDOS">
+              <PropertyRef Name="COD_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNC">
+          <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="0..1" />
+          <End Role="PEDIDOS" Type="Self.PEDIDOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FUNCIONARIO">
+              <PropertyRef Name="COD_FUNC" />
+            </Principal>
+            <Dependent Role="PEDIDOS">
+              <PropertyRef Name="COD_FUNC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MARMITAS">
+          <End Role="MARMITAS" Type="Self.MARMITAS" Multiplicity="0..1" />
+          <End Role="PEDIDOS" Type="Self.PEDIDOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MARMITAS">
+              <PropertyRef Name="COD_MARM" />
+            </Principal>
+            <Dependent Role="PEDIDOS">
+              <PropertyRef Name="COD_MARM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MARMITAModelStoreContainer">
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FUNCIONARIO" EntityType="Self.FUNCIONARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MARMITAS" EntityType="Self.MARMITAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PEDIDOS" EntityType="Self.PEDIDOS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CLIENTE" Association="Self.FK_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="PEDIDOS" EntitySet="PEDIDOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNC" Association="Self.FK_FUNC">
+            <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+            <End Role="PEDIDOS" EntitySet="PEDIDOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MARMITAS" Association="Self.FK_MARMITAS">
+            <End Role="MARMITAS" EntitySet="MARMITAS" />
+            <End Role="PEDIDOS" EntitySet="PEDIDOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MARMITAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="COD_CLIENTE" />
+          </Key>
+          <Property Name="COD_CLIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CEP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RUA" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BAIRRO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CIDADE" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="NR_CASA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="COMPLEMTENTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LOGIN" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SENHA" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PERFIL" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PEDIDOS" Relationship="Self.FK_CLIENTE" FromRole="CLIENTE" ToRole="PEDIDOS" />
+        </EntityType>
+        <EntityType Name="FUNCIONARIO">
+          <Key>
+            <PropertyRef Name="COD_FUNC" />
+          </Key>
+          <Property Name="COD_FUNC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FUNÇÃO" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PEDIDOS" Relationship="Self.FK_FUNC" FromRole="FUNCIONARIO" ToRole="PEDIDOS" />
+        </EntityType>
+        <EntityType Name="MARMITAS">
+          <Key>
+            <PropertyRef Name="COD_MARM" />
+          </Key>
+          <Property Name="COD_MARM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRECO" Type="Decimal" Precision="10" Scale="5" />
+          <Property Name="INGREDIENTES" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="QUANTIDADE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PEDIDOS" Relationship="Self.FK_MARMITAS" FromRole="MARMITAS" ToRole="PEDIDOS" />
+        </EntityType>
+        <EntityType Name="PEDIDOS">
+          <Key>
+            <PropertyRef Name="COD_PED" />
+          </Key>
+          <Property Name="COD_PED" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COD_CLIENTE" Type="Int32" />
+          <Property Name="COD_MARM" Type="Int32" />
+          <Property Name="COD_FUNC" Type="Int32" />
+          <Property Name="HORARIO_PEDIDO" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK_CLIENTE" FromRole="PEDIDOS" ToRole="CLIENTE" />
+          <NavigationProperty Name="FUNCIONARIO" Relationship="Self.FK_FUNC" FromRole="PEDIDOS" ToRole="FUNCIONARIO" />
+          <NavigationProperty Name="MARMITAS" Relationship="Self.FK_MARMITAS" FromRole="PEDIDOS" ToRole="MARMITAS" />
+        </EntityType>
+        <Association Name="FK_CLIENTE">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="PEDIDOS" Type="Self.PEDIDOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="COD_CLIENTE" />
+            </Principal>
+            <Dependent Role="PEDIDOS">
+              <PropertyRef Name="COD_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNC">
+          <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="0..1" />
+          <End Role="PEDIDOS" Type="Self.PEDIDOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FUNCIONARIO">
+              <PropertyRef Name="COD_FUNC" />
+            </Principal>
+            <Dependent Role="PEDIDOS">
+              <PropertyRef Name="COD_FUNC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MARMITAS">
+          <End Role="MARMITAS" Type="Self.MARMITAS" Multiplicity="0..1" />
+          <End Role="PEDIDOS" Type="Self.PEDIDOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MARMITAS">
+              <PropertyRef Name="COD_MARM" />
+            </Principal>
+            <Dependent Role="PEDIDOS">
+              <PropertyRef Name="COD_MARM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MARMITAEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
+          <EntitySet Name="FUNCIONARIO" EntityType="Self.FUNCIONARIO" />
+          <EntitySet Name="MARMITAS" EntityType="Self.MARMITAS" />
+          <EntitySet Name="PEDIDOS" EntityType="Self.PEDIDOS" />
+          <AssociationSet Name="FK_CLIENTE" Association="Self.FK_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="PEDIDOS" EntitySet="PEDIDOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNC" Association="Self.FK_FUNC">
+            <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+            <End Role="PEDIDOS" EntitySet="PEDIDOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MARMITAS" Association="Self.FK_MARMITAS">
+            <End Role="MARMITAS" EntitySet="MARMITAS" />
+            <End Role="PEDIDOS" EntitySet="PEDIDOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MARMITAModelStoreContainer" CdmEntityContainer="MARMITAEntities1">
+          <EntitySetMapping Name="CLIENTE">
+            <EntityTypeMapping TypeName="MARMITAModel.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="COD_CLIENTE" ColumnName="COD_CLIENTE" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="RUA" ColumnName="RUA" />
+                <ScalarProperty Name="BAIRRO" ColumnName="BAIRRO" />
+                <ScalarProperty Name="CIDADE" ColumnName="CIDADE" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="NR_CASA" ColumnName="NR_CASA" />
+                <ScalarProperty Name="COMPLEMTENTO" ColumnName="COMPLEMTENTO" />
+                <ScalarProperty Name="LOGIN" ColumnName="LOGIN" />
+                <ScalarProperty Name="SENHA" ColumnName="SENHA" />
+                <ScalarProperty Name="PERFIL" ColumnName="PERFIL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FUNCIONARIO">
+            <EntityTypeMapping TypeName="MARMITAModel.FUNCIONARIO">
+              <MappingFragment StoreEntitySet="FUNCIONARIO">
+                <ScalarProperty Name="COD_FUNC" ColumnName="COD_FUNC" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="TELEFONE" ColumnName="TELEFONE" />
+                <ScalarProperty Name="FUNÇÃO" ColumnName="FUNÇÃO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MARMITAS">
+            <EntityTypeMapping TypeName="MARMITAModel.MARMITAS">
+              <MappingFragment StoreEntitySet="MARMITAS">
+                <ScalarProperty Name="COD_MARM" ColumnName="COD_MARM" />
+                <ScalarProperty Name="PRECO" ColumnName="PRECO" />
+                <ScalarProperty Name="INGREDIENTES" ColumnName="INGREDIENTES" />
+                <ScalarProperty Name="QUANTIDADE" ColumnName="QUANTIDADE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PEDIDOS">
+            <EntityTypeMapping TypeName="MARMITAModel.PEDIDOS">
+              <MappingFragment StoreEntitySet="PEDIDOS">
+                <ScalarProperty Name="COD_PED" ColumnName="COD_PED" />
+                <ScalarProperty Name="COD_CLIENTE" ColumnName="COD_CLIENTE" />
+                <ScalarProperty Name="COD_MARM" ColumnName="COD_MARM" />
+                <ScalarProperty Name="COD_FUNC" ColumnName="COD_FUNC" />
+                <ScalarProperty Name="HORARIO_PEDIDO" ColumnName="HORARIO_PEDIDO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

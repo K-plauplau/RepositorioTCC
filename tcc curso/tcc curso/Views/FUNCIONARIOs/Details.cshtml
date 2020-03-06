@@ -1,0 +1,59 @@
+﻿@model tcc_curso.Models.FUNCIONARIO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FUNCIONARIO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EMAIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMAIL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TELEFONE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TELEFONE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FUNÇÃO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FUNÇÃO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CLIENTE.NOME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CLIENTE.NOME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.COD_FUNC }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
