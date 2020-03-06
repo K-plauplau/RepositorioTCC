@@ -10,7 +10,7 @@ namespace tcc_curso.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        public ActionResult Index()
+        public ActionResult  dale()
         {
             return View();
         }
